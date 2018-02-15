@@ -1,4 +1,4 @@
-package com.qount.common;
+package com.qount.wallremainders.common;
 
 import java.io.IOException;
 import java.io.StringWriter;

@@ -1,24 +1,18 @@
-package com.qount.servlets;
+package com.qount.wallremainders.servlets;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
-import com.qount.common.Constants;
-import com.qount.common.Log4jLoder;
-import com.qount.common.MySQLManager;
-import com.qount.common.PropertiesLoader;
-import com.qount.common.PropertyManager;
+import com.qount.wallremainders.common.Log4jLoder;
+import com.qount.wallremainders.common.PropertiesLoader;
+import com.qount.wallremainders.database.mySQL.MySQLManager;
+import com.qount.wallremainders.utils.Constants;
 
 import io.swagger.jaxrs.config.BeanConfig;
 
-/**
- * 
- * @author mateen
- * @version 1.0 JUne 20th 2017
- */
 public class ConfigurationLoaderServlet extends HttpServlet {
-
+	
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -30,14 +24,15 @@ public class ConfigurationLoaderServlet extends HttpServlet {
 		loadSwaggerConfiguration(config);
 		Log4jLoder.getLog4jLoder().initilializeLogging();
 		PropertiesLoader.getPropertiesLoader().loadProjectProperties();
-		if (PropertyManager.getProperty("create.db.connection.onload").equals("true")) {
-			try {
-				Class.forName(MySQLManager.class.getName());
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
+		try {
+			Class.forName(MySQLManager.class.getName());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
+		
 	}
+
+	
 
 	public static void loadSwaggerConfiguration(ServletConfig config) {
 		BeanConfig beanConfig = new BeanConfig();

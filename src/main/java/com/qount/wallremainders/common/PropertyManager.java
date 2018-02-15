@@ -1,4 +1,4 @@
-package com.qount.common;
+package com.qount.wallremainders.common;
 
 import java.util.Properties;
 
